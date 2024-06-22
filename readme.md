@@ -22,4 +22,4 @@ Task editing view
 
 Issue tracker view: 
 
-![Alt text](pic1.jpg
+![Alt text](pic1.jpg)
