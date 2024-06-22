@@ -1,6 +1,6 @@
 Authors: Szymon Kuczyński s22466, Michał Kalinowski s22464
 
-Simple ToDoApp project functionality list:
+Simple ToDoApp allowing user to create, delete and edit tasks containing following features:
 
 Adding tasks
 
@@ -22,4 +22,4 @@ Task editing view
 
 Issue tracker view: 
 
-![Alt text](pic1.jpg)
+![Alt text](pic1.jpg
