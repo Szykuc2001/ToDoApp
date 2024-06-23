@@ -20,6 +20,12 @@ View of deleting tasks
 
 Task editing view
 
+Searchbar for searching tasks by keywords
+
+Task filter view
+
+Tests for the functionalities
+
 Issue tracker view: 
 
 ![Alt text](pic1.jpg)
