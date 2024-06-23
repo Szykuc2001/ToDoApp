@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"> <!-- Center the content horizontally and vertically -->
+
+    <TextView
+        android:id="@+id/totalTasksTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Total Tasks: "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/completedTasksTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Completed Tasks: "
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/pendingTasksTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending Tasks: "
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Main" />
+</LinearLayout>
