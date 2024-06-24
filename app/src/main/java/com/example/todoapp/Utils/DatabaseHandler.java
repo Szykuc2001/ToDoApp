@@ -130,6 +130,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TODO_TABLE, ID + "= ?", new String[]{String.valueOf(id)}); // Delete the task from the database
     }
 
+    @SuppressLint("Range")
+    public List<ToDoModel> searchTasks(String keyword) {
+        List<ToDoModel> taskList = new ArrayList<>();
+        Cursor cur = null;
+        db.beginTransaction();
+        try {
+            cur = db.query(TODO_TABLE, null, TASK + " LIKE ?", new String[]{"%" + keyword + "%"}, null, null, null, null);
+            if (cur != null) {
+                if (cur.moveToFirst()) {
+                    do {
+                        ToDoModel task = new ToDoModel();
+                        task.setId(cur.getInt(cur.getColumnIndex(ID)));
+                        task.setTask(cur.getString(cur.getColumnIndex(TASK)));
+                        task.setStatus(cur.getInt(cur.getColumnIndex(STATUS)));
+                        taskList.add(task);
+                    } while (cur.moveToNext());
+                }
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+            if (cur != null) {
+                cur.close();
+            }
+        }
+        return taskList;
+    }
     // Retrieve the total number of tasks
     public int getTasksCount() {
         String countQuery = "SELECT * FROM " + TODO_TABLE;
