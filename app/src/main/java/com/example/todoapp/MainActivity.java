@@ -3,6 +3,7 @@ package com.example.todoapp;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListne
     private List<ToDoModel> taskList; // List of tasks
     private DatabaseHandler db; // Database handler for CRUD operations
     private FloatingActionButton fab; // Floating action button for adding new tasks
+
+    private Button statsButton;
 
     // Called when the activity is created
     @Override
@@ -62,6 +65,13 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListne
             public void onClick(View v) {
                 // Show the AddNewTask dialog when the button is clicked
                 AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
+            }
+        });
+
+        statsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StatsActivity.newInstance(MainActivity.this,StatsActivity.class);
             }
         });
     }

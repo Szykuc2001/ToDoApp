@@ -129,5 +129,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteTask(int id) {
         db.delete(TODO_TABLE, ID + "= ?", new String[]{String.valueOf(id)}); // Delete the task from the database
     }
+
+    // Retrieve the total number of tasks
+    public int getTasksCount() {
+        String countQuery = "SELECT * FROM " + TODO_TABLE;
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+
+    // Retrieve the number of completed tasks
+    public int getCompletedTasksCount() {
+        String countQuery = "SELECT * FROM " + TODO_TABLE + " WHERE " + STATUS + " = 1";
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
 }
 
