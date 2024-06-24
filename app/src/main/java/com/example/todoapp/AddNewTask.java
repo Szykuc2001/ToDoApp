@@ -126,8 +126,8 @@ public class AddNewTask extends BottomSheetDialogFragment {
         super.onDismiss(dialog);
         Activity activity = getActivity();
         // Notify the activity that the dialog has been dismissed
-        if (activity instanceof DialogCloseListner) {
-            ((DialogCloseListner) activity).handleDialogClose(dialog);
+        if (activity instanceof DialogCloseListener) {
+            ((DialogCloseListener) activity).handleDialogClose(dialog);
         }
     }
 
