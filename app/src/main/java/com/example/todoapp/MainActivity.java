@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -20,14 +21,15 @@ import java.util.Collections;
 import java.util.List;
 
 // Main activity class for managing the ToDo list
-public class MainActivity extends AppCompatActivity implements DialogCloseListner {
+public class MainActivity extends AppCompatActivity implements DialogCloseListener {
 
     private RecyclerView tasksRecyclerView; // RecyclerView for displaying tasks
     private ToDoAdapter tasksAdapter; // Adapter for managing tasks in the RecyclerView
     private List<ToDoModel> taskList; // List of tasks
     private DatabaseHandler db; // Database handler for CRUD operations
     private FloatingActionButton fab; // Floating action button for adding new tasks
-
+    private EditText searchEditText;
+    private Button searchButton;
     private Button statsButton;
 
     // Called when the activity is created
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListne
         tasksRecyclerView.setAdapter(tasksAdapter); // Set the adapter for the RecyclerView
 
         fab = findViewById(R.id.fab); // Initialize the floating action button
+        searchEditText = findViewById(R.id.searchEditText);
+        searchButton = findViewById(R.id.searchButton);
+        statsButton = findViewById(R.id.statsButton);
 
         // Set up item touch helper for swipe actions
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
@@ -65,6 +70,24 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListne
             public void onClick(View v) {
                 // Show the AddNewTask dialog when the button is clicked
                 AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyword = searchEditText.getText().toString().trim();
+                if (!keyword.isEmpty()) {
+                    taskList = db.searchTasks(keyword);
+                    Collections.reverse(taskList);
+                    tasksAdapter.setTasks(taskList);
+                    tasksAdapter.notifyDataSetChanged();
+                } else {
+                    taskList = db.getAllTasks();
+                    Collections.reverse(taskList);
+                    tasksAdapter.setTasks(taskList);
+                    tasksAdapter.notifyDataSetChanged();
+                }
             }
         });
 
